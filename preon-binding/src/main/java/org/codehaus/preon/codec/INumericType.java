@@ -17,10 +17,6 @@ public interface INumericType {
 	Class<?> getType();
 	
 	Class<?> getPrimitiveType();
-	
-	default Class<?>[] getNumericTypes() {
-		Class<?>[] numTypes = {getType()};
-		return numTypes;
-	}
 
+	Class<?>[] getNumericTypes();
 }

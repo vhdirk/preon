@@ -30,8 +30,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Float.TYPE;
 		}
-        
 
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
     },
 
     Double {
@@ -57,6 +60,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Double.TYPE;
 		}
+
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
     },
 
     Integer {
@@ -80,6 +88,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Integer.TYPE;
 		}
+
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
     },
 
     Long {
@@ -103,6 +116,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Long.TYPE;
 		}
+
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
     },
 
     Short {
@@ -126,6 +144,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Short.TYPE;
 		}
+
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
     },
 
     Byte {
@@ -149,6 +172,11 @@ public enum NumericType implements INumericType {
 		public Class<?> getPrimitiveType() {
 			return java.lang.Byte.TYPE;
 		}
+
+        @Override
+        public Class<?>[] getNumericTypes() {
+            return new Class<?>[]{getType()};
+        }
         
     };
 
