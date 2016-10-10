@@ -53,7 +53,7 @@ import nl.flotsam.pecia.SimpleContents;
 public class FixedLengthStringCodec implements Codec<String> {
 
     private final Charset encoding;
-    
+
     private final CharsetEncoder encoder;
 
     private final Expression<Integer, Resolver> sizeExpr;
@@ -61,7 +61,7 @@ public class FixedLengthStringCodec implements Codec<String> {
     private final String match;
 
     private final BoundString.ByteConverter byteConverter;
-    
+
     private final boolean trim;
 
     public FixedLengthStringCodec(Charset encoding,
@@ -76,10 +76,10 @@ public class FixedLengthStringCodec implements Codec<String> {
     }
 
     //keep old behaviour for backwards compatibility
-	public FixedLengthStringCodec(Charset encoding, Expression<Integer, Resolver> sizeExpr, String match,
-			BoundString.ByteConverter byteConverter) {
-		this(encoding, sizeExpr, match, byteConverter, true);
-	}
+    public FixedLengthStringCodec(Charset encoding, Expression<Integer, Resolver> sizeExpr, String match,
+                                  BoundString.ByteConverter byteConverter) {
+        this(encoding, sizeExpr, match, byteConverter, true);
+    }
 
     public String decode(BitBuffer buffer, Resolver resolver,
                          Builder builder) throws DecodingException {
@@ -88,16 +88,16 @@ public class FixedLengthStringCodec implements Codec<String> {
 		 * */
         int size = sizeExpr.eval(resolver);
         ByteBuffer bytebuffer = ByteBuffer.allocate(size);
-		byte readbyte;
-		for (int i = 0; i < size; i++) {
-			readbyte = byteConverter.convert(buffer.readAsByte(8));
+        byte readbyte;
+        for (int i = 0; i < size; i++) {
+            readbyte = byteConverter.convert(buffer.readAsByte(8));
             bytebuffer.put(readbyte);
         }
         bytebuffer.rewind();
         String result;
         result = encoding.decode(bytebuffer).toString();
         if (trim)
-        	result = result.trim(); // remove padding characters
+            result = result.trim(); // remove padding characters
         if (match.length() > 0) {
             if (!match.equals(result)) {
                 throw new DecodingException(new IllegalStateException(
@@ -109,6 +109,9 @@ public class FixedLengthStringCodec implements Codec<String> {
     }
 
     public void encode(String value, BitChannel channel, Resolver resolver) throws IOException {
+        if (value == null) {
+            value = ""; // Fix for NPE
+        }
         int size = sizeExpr.eval(resolver);
         ByteBuffer bytebuffer = ByteBuffer.allocate(size);
         encoder.encode(CharBuffer.wrap(value), bytebuffer, true);
@@ -117,7 +120,7 @@ public class FixedLengthStringCodec implements Codec<String> {
             bytebuffer.put(new byte[size - bytebuffer.position()]);
         }
         bytebuffer.flip(); // switch to reading
-        
+
         byte[] bytes = new byte[size];
         bytebuffer.get(bytes);
         for (int i = 0; i < bytes.length; i++) {
