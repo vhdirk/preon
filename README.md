@@ -5,7 +5,7 @@ license](https://opensource.org/licenses/MIT).*
 
 **HEADS UP:** *Preon needs a new maintainer. In fact, I pretty much haven't worked on it for years now. Meanwhile, people are considering it to be useful. However I moved on, from Java to Scala and now Node.js, and I don't see myself return to Java in a while. If you happen to be interested to take over ownership of this project, then send me an email: wilfredspringer at gmail.com.*
 
-[![Circle CI](https://circleci.com/gh/preon/preon.svg?style=svg)](https://circleci.com/gh/preon/preon)
+[![Build Status](https://travis-ci.org/Enovea/preon.svg?branch=master)](https://travis-ci.org/Enovea/preon)
 
 Preon aims to provide a framework for dealing with binary encoded
 data; or more specifically, it aims to deal with situations in which
