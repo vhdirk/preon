@@ -1,0 +1,6 @@
+architect:
+  - fleger
+  - antoinecarton
+release:
+  script: |
+    mvn --batch-mode -Dtag=preon-${releaseVersion} release:prepare -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${nextVersion}
